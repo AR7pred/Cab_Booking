@@ -14,10 +14,10 @@ public class DriversSignupRequest {
 	private double latitude;
 	private double longitude;
 	
-	@OneToOne(mappedBy = "driver")
+//	@OneToOne(mappedBy = "driver")
 	private License license;
 	
-	@OneToOne(mappedBy="driver")
+//	@OneToOne(mappedBy="driver")
 	private Vehicle vehicle;
 	
 	public DriversSignupRequest() {

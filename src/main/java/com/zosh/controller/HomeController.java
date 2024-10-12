@@ -31,7 +31,7 @@ public class HomeController {
 	
 	@GetMapping({"/api","/"})
 	public ResponseEntity<MessageResponse> homeController(){
-		MessageResponse res=new MessageResponse("welcome to cab booking api");
+		MessageResponse res=new MessageResponse("Welcome to Cab Booking API");
 		
 		return new ResponseEntity<MessageResponse>(res,HttpStatus.ACCEPTED);
 		
@@ -39,13 +39,11 @@ public class HomeController {
 	
 	@GetMapping("/api/profile")
 	public ResponseEntity<?> userProfileHandler(@RequestHeader("Authorization") String jwt) throws UserException{
-		
-		
-		
+
 		String email=jwtUtil.getEmailFromToken(jwt);
 		
 		if(email==null) {
-			throw new BadCredentialsException("invalid token recived");
+			throw new BadCredentialsException("invalid token received");
 		}
 		
 		Driver driver=driverRepository.findByEmail(email);

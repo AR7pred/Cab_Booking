@@ -12,7 +12,7 @@ public interface DriverService {
 	public Driver registerDriver(DriversSignupRequest driverSignupRequest);
 	
 	public List<Driver> getAvailableDrivers(double pickupLatitude,
-			double picupLongitude,double radius, Ride ride);
+			double picupLongitude, Ride ride);
 	
 	public Driver findNearestDriver(List<Driver> availableDrivers, 
 			double picupLatitude, double picupLongitude);

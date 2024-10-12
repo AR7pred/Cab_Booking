@@ -25,11 +25,9 @@ public class UserServiceImplementation implements UserService {
 	@Override
 	public User createUser(User user) throws UserException {
 		
-		User emailExist = findUserByEmail(user.getEmail());
+		User emailExist = userRepository.findByEmail(user.getEmail());
 		
 		if(emailExist!=null)throw new UserException("Email Already Used With Another Account");
-		
-
 		
 		return userRepository.save(user);
 		
@@ -46,16 +44,16 @@ public class UserServiceImplementation implements UserService {
 		throw new UserException("user not found with id "+userId);
 	}
 
-	@Override
-	public User findUserByEmail(String email) throws UserException {
+//	@Override
+//	public User findUserByEmail(String email) throws UserException {
 		
-		User user=userRepository.findByEmail(email);
+//		User user=userRepository.findByEmail(email);
 		
-		if(user!=null) {
-			return user;
-		}
-		throw new UserException("user not found with email "+email);
-	}
+//		if(user!=null) {
+//			return user;
+//		}
+//		throw new UserException("user not found with email "+email);
+//	}
 
 	@Override
 	public User getReqUserProfile(String token) throws UserException {
@@ -68,14 +66,13 @@ public class UserServiceImplementation implements UserService {
 		}
 		
 		throw new UserException("invalid token...");
-		
 	}
 
 	@Override
 	public User findUserByToken(String token) throws UserException {
 		String email=jwtUtil.getEmailFromToken(token);
 		if(email==null) {
-			throw new BadCredentialsException("invalid token recived");
+			throw new BadCredentialsException("invalid token recieved");
 		}
 		User user=userRepository.findByEmail(email);
 		

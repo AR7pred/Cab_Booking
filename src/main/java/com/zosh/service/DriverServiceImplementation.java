@@ -29,7 +29,7 @@ public class DriverServiceImplementation implements DriverService {
 	private DriverRepository driverRepository;
 	
 	@Autowired
-	private Calculaters distenceCalculator;
+	private Calculaters distanceCalculator;
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -47,7 +47,7 @@ public class DriverServiceImplementation implements DriverService {
 	private RideRepository rideRepository;
 
 	@Override
-	public List<Driver> getAvailableDrivers(double pickupLatitude, double picupLongitude, double radius, Ride ride) {
+	public List<Driver> getAvailableDrivers(double pickupLatitude, double pickupLongitude, Ride ride) {
 		List<Driver> allDrivers=driverRepository.findAll();
 		
 		List<Driver> availableDriver=new ArrayList<>();
@@ -70,9 +70,9 @@ public class DriverServiceImplementation implements DriverService {
 			
 			
 			
-			double distence=distenceCalculator.calculateDistance(driverLatitude,driverLongitude, pickupLatitude, picupLongitude);
+			double distance=distanceCalculator.calculateDistance(driverLatitude,driverLongitude, pickupLatitude, pickupLongitude);
 			
-//			if(distence<=radius) {
+//			if(distance<=radius) {
 				availableDriver.add(driver);
 //			}
 		}
@@ -81,7 +81,7 @@ public class DriverServiceImplementation implements DriverService {
 	}
 
 	@Override
-	public Driver findNearestDriver(List<Driver> availableDrivers, double picupLatitude, double picupLongitude) {
+	public Driver findNearestDriver(List<Driver> availableDrivers, double pickupLatitude, double pickupLongitude) {
 		
 		double min=Double.MAX_VALUE;;
 		Driver nearestDriver = null;
@@ -93,10 +93,10 @@ public class DriverServiceImplementation implements DriverService {
 			double driverLatitude=driver.getLatitude();
 			double driverLongitude=driver.getLongitude();
 			
-			double distence=distenceCalculator.calculateDistance(picupLatitude, picupLongitude, driverLatitude,driverLongitude);
+			double distance=distanceCalculator.calculateDistance(pickupLatitude, pickupLongitude, driverLatitude,driverLongitude);
 			
-			if(min>distence) {
-				min=distence;
+			if(min>distance) {
+				min=distance;
 				nearestDriver=driver;
 			}
 		}
@@ -142,11 +142,11 @@ public class DriverServiceImplementation implements DriverService {
 		driver.setLicense(savedLicense);
 		driver.setVehicle(savedVehicle);
 		driver.setRole(UserRole.DRIVER) ;
-		
+
+		//this was not necessary
 		driver.setLatitude(driversSignupRequest.getLatitude());
 		driver.setLongitude(driversSignupRequest.getLongitude());
-		
-		
+
 		Driver createdDriver = driverRepository.save(driver);
 		
 		savedLicense.setDriver(createdDriver);
@@ -166,9 +166,8 @@ public class DriverServiceImplementation implements DriverService {
 		if(driver==null) {
 			throw new DriverException("driver not exist with email " + email);
 		}
-		
+
 		return driver;
-		
 	}
 
 	@Override

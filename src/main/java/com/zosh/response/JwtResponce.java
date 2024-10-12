@@ -43,54 +43,37 @@ public class JwtResponce {
 		return jwt;
 	}
 
-
 	public void setJwt(String jwt) {
 		this.jwt = jwt;
 	}
-
 
 	public String getMessage() {
 		return message;
 	}
 
-
 	public void setMessage(String message) {
 		this.message = message;
 	}
-
 
 	public boolean isAuthenticated() {
 		return isAuthenticated;
 	}
 
-
 	public void setAuthenticated(boolean isAuthenticated) {
 		this.isAuthenticated = isAuthenticated;
 	}
-
-
-
 
 	public boolean isError() {
 		return isError;
 	}
 
-
-
-
 	public void setError(boolean isError) {
 		this.isError = isError;
 	}
 
-
-
-
 	public String isErrorDetails() {
 		return errorDetails;
 	}
-
-
-
 
 	public void setErrorDetails(String errorDetails) {
 		this.errorDetails = errorDetails;

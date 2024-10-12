@@ -23,7 +23,7 @@ public class Driver {
 	private String name;
 	private String email;
 	private String mobile;
-	private double ratig;
+	private double rating;
 	private double latitude;
 	private double longitude;
 	
@@ -51,14 +51,14 @@ public class Driver {
 		
 	}
 	
-	public Driver(Integer id, String name, String email, String mobile, double ratig, double latitude, double longitude,
+	public Driver(Integer id, String name, String email, String mobile, double rating, double latitude, double longitude,
 			UserRole role, String password, License license, List<Ride> rides, Vehicle vehicle, Ride currentRide) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.mobile = mobile;
-		this.ratig = ratig;
+		this.rating = rating;
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.role = role;
@@ -157,12 +157,12 @@ public class Driver {
 		this.mobile = mobile;
 	}
 	
-	public double getRatig() {
-		return ratig;
+	public double getRating() {
+		return rating;
 	}
 	
-	public void setRatig(double ratig) {
-		this.ratig = ratig;
+	public void setRating(double rating) {
+		this.rating = rating;
 	}
 	
 	public double getLatitude() {
@@ -183,7 +183,7 @@ public class Driver {
 
 	@Override
 	public String toString() {
-		return "Driver [id=" + id + ", name=" + name + ", email=" + email + ", mobile=" + mobile + ", ratig=" + ratig
+		return "Driver [id=" + id + ", name=" + name + ", email=" + email + ", mobile=" + mobile + ", rating=" + rating
 				+ ", latitude=" + latitude + ", longitude=" + longitude + "]";
 	}
 	

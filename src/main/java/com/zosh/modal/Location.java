@@ -10,10 +10,6 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "locations")
 public class Location {
-
-
-
-
  
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

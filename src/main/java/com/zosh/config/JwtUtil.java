@@ -24,8 +24,7 @@ public class JwtUtil {
 	
 	public String generateJwtToken(Authentication authentication) {
 		
-		
-		
+
 		String jwt=Jwts.builder().setIssuer("Ar7")
 				.setIssuedAt(new Date())
 				.setExpiration(new Date(new Date().getTime()+86400000))
@@ -41,7 +40,11 @@ public class JwtUtil {
 
 		token=token.substring(7);
 		
-		Claims claims= Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody();
+		Claims claims= Jwts.parserBuilder()
+				.setSigningKey(key)
+				.build()
+				.parseClaimsJws(token)
+				.getBody();
 		
 		String email= String.valueOf(claims.get("email"));
 		

@@ -35,7 +35,7 @@ public class JwtTokenGeneratorFilter extends OncePerRequestFilter {
 			
 			String jwt=
 					Jwts.builder()
-					.setIssuer("Code with zosh")
+					.setIssuer("Ar7")
 					.setIssuedAt(new Date())
 					.setExpiration(new Date(new Date().getTime()+ 86400000))
 					.claim("authorities", populateAuthorities(authentication.getAuthorities()))

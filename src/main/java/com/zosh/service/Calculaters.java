@@ -33,7 +33,7 @@ public class Calculaters {
 	    }
 	 
 	 public double calculateFare(double distance) {
-	        double baseFare = 11;
+	        double baseFare = 10;
 	        double totalFare=baseFare*distance;
 	        return totalFare;
 	    }

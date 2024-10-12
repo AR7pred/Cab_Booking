@@ -22,7 +22,7 @@ public class GlobleException {
 		ErrorDetails err=new ErrorDetails(ue.getMessage(),req.getDescription(false),LocalDateTime.now());
 		
 		
-		return new ResponseEntity<ErrorDetails>(err,HttpStatus.ACCEPTED);
+		return new ResponseEntity<ErrorDetails>(err,HttpStatus.BAD_REQUEST);
 		
 	}
 

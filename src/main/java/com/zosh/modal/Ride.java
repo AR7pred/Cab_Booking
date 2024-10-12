@@ -45,7 +45,7 @@ public class Ride {
 	
 	private String destinationArea;
 	
-	private double distence;
+	private double distance;
 	
 	private long duration;
 	
@@ -69,7 +69,7 @@ public class Ride {
 
 	public Ride(Integer id, User user, Driver driver, List<Integer> declinedDrivers, double pickupLatitude,
 			double pickupLongitude, double destinationLatitude, double destinationLongitude, String pickupArea,
-			String destinationArea, double distence, long duration, RideStatus status, LocalDateTime startTime,
+			String destinationArea, double distance, long duration, RideStatus status, LocalDateTime startTime,
 			LocalDateTime endTime, double fare) {
 		super();
 		this.id = id;
@@ -82,7 +82,7 @@ public class Ride {
 		this.destinationLongitude = destinationLongitude;
 		this.pickupArea = pickupArea;
 		this.destinationArea = destinationArea;
-		this.distence = distence;
+		this.distance = distance;
 		this.duration = duration;
 		this.status = status;
 		this.startTime = startTime;
@@ -195,11 +195,11 @@ public class Ride {
 	}
 
 	public double getDistence() {
-		return distence;
+		return distance;
 	}
 
-	public void setDistence(double distence) {
-		this.distence = distence;
+	public void setDistence(double distance) {
+		this.distance = distance;
 	}
 
 	public long getDuration() {

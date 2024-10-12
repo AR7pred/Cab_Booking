@@ -12,8 +12,8 @@ public interface RideService {
 	
 	public Ride requestRide(RideRequest rideRequest, User user) throws DriverException;
 	
-	public Ride createRideRequest(User user, Driver nearesDriver,
-			double picupLatitude,double pickupLongitude,
+	public Ride createRideRequest(User user, Driver nearestDriver,
+			double pickupLatitude,double pickupLongitude,
 			double destinationLatitude,double destinationLongitude,
 			String pickupArea,String destinationArea);
 	

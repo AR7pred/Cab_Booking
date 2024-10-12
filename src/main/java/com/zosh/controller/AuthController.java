@@ -124,10 +124,7 @@ public class AuthController {
 		        
 			return new ResponseEntity<JwtResponce>(jwtResponse,HttpStatus.BAD_REQUEST);
 		}
-		
-		
-		
-		
+
 		Driver createdDriver=driverService.registerDriver(driverSignupRequest);
 		
 		Authentication authentication = new UsernamePasswordAuthenticationToken(createdDriver.getEmail(), createdDriver.getPassword());
@@ -141,8 +138,7 @@ public class AuthController {
         jwtResponse.setErrorDetails(null);
         jwtResponse.setType(UserRole.DRIVER);
         jwtResponse.setMessage("Account Created Successfully: "+createdDriver.getName());
-        
-        
+
 		return new ResponseEntity<JwtResponce>(jwtResponse,HttpStatus.ACCEPTED);
 	}
 	
@@ -163,9 +159,9 @@ public class AuthController {
         jwtResponse.setAuthenticated(true);
         jwtResponse.setError(false);
         jwtResponse.setErrorDetails(null);
-        jwtResponse.setMessage("Account Created Successfully: ");
+        jwtResponse.setMessage("Account Log-in Successfully: ");
 
-        return new ResponseEntity<JwtResponce>(jwtResponse,HttpStatus.OK);
+        return new ResponseEntity<JwtResponce>(jwtResponse,HttpStatus.ACCEPTED);
     }
 	
 	private Authentication authenticate(String username, String password) {

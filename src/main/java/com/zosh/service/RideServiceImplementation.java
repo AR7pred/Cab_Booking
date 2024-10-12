@@ -46,8 +46,8 @@ public class RideServiceImplementation implements RideService {
 	@Override
 	public Ride requestRide(RideRequest rideRequest, User user) throws DriverException {
 		
-		double picupLatitude=rideRequest.getPickupLatitude();
-		double picupLongitude=rideRequest.getPickupLongitude();
+		double pickupLatitude=rideRequest.getPickupLatitude();
+		double pickupLongitude=rideRequest.getPickupLongitude();
 		double destinationLatitude=rideRequest.getDestinationLatitude();
 		double destinationLongitude=rideRequest.getDestinationLongitude();
 		String pickupArea=rideRequest.getPickupArea();
@@ -55,10 +55,10 @@ public class RideServiceImplementation implements RideService {
 		
 		Ride existingRide = new Ride();
 		
-		List<Driver> availableDrivers=driverService.getAvailableDrivers(picupLatitude, 
-				picupLongitude, 5, existingRide);
+		List<Driver> availableDrivers=driverService.getAvailableDrivers(pickupLatitude,
+				pickupLongitude, existingRide);
 		
-		Driver nearestDriver=driverService.findNearestDriver(availableDrivers, picupLatitude, picupLongitude);
+		Driver nearestDriver=driverService.findNearestDriver(availableDrivers, pickupLatitude, pickupLongitude);
 		
 		if(nearestDriver==null) {
 			throw new DriverException("Driver not available");
@@ -67,7 +67,7 @@ public class RideServiceImplementation implements RideService {
 		System.out.println(" duration ----- before ride ");
 		
         Ride ride = createRideRequest(user, nearestDriver, 
-        		picupLatitude, picupLongitude, 
+        		pickupLatitude, pickupLongitude,
         		destinationLatitude, destinationLongitude,
         		pickupArea,destinationArea
         		);
@@ -85,12 +85,8 @@ public class RideServiceImplementation implements RideService {
         Notification savedNofication = notificationRepository.save(notification);
         
 //        rideService.sendNotificationToDriver(nearestDriver, ride);
-        
-        
 
         return ride;
-        
-		
 	}
 
 	@Override
@@ -180,7 +176,7 @@ public class RideServiceImplementation implements RideService {
 		ride.setStatus(RideStatus.COMPLETED);
 		ride.setEndTime(LocalDateTime.now());;
 		
-		double distence=calculaters.calculateDistance(ride.getDestinationLatitude(), ride.getDestinationLongitude(), ride.getPickupLatitude(), ride.getPickupLongitude());
+		double distance=calculaters.calculateDistance(ride.getDestinationLatitude(), ride.getDestinationLongitude(), ride.getPickupLatitude(), ride.getPickupLongitude());
 		
 		LocalDateTime start=ride.getStartTime();
 		LocalDateTime end=ride.getEndTime();
@@ -189,9 +185,9 @@ public class RideServiceImplementation implements RideService {
 
 
 		System.out.println("duration ------- "+ milliSecond);
-		double fare=calculaters.calculateFare(distence);
+		double fare=calculaters.calculateFare(distance);
 		
-		ride.setDistence(Math.round(distence * 100.0) / 100.0);
+		ride.setDistence(Math.round(distance * 100.0) / 100.0);
 		ride.setFare((int) Math.round(fare));
 		ride.setDuration(milliSecond);
 		ride.setEndTime(LocalDateTime.now());
@@ -217,7 +213,7 @@ public class RideServiceImplementation implements RideService {
         notification.setTimestamp(LocalDateTime.now());
         notification.setType(NotificationType.RIDE_CONFIRMATION);
 		
-        Notification savedNofication = notificationRepository.save(notification);
+        Notification savedNotification = notificationRepository.save(notification);
 		
 	}
 	
@@ -226,8 +222,7 @@ public class RideServiceImplementation implements RideService {
 		Ride ride=findRideById(rideId);
 		ride.setStatus(RideStatus.CANCELLED);
 		rideRepository.save(ride);
-		
-		
+
 	}
 
 	@Override
@@ -251,12 +246,11 @@ public class RideServiceImplementation implements RideService {
 		System.out.println(ride.getId()+" - "+ride.getDeclinedDrivers());
 		
 		List<Driver> availableDrivers=driverService.getAvailableDrivers(ride.getPickupLatitude(), 
-				ride.getPickupLongitude(), 5,ride);
+				ride.getPickupLongitude(),ride);
 		
 		Driver nearestDriver=driverService.findNearestDriver(availableDrivers, ride.getPickupLatitude(), 
 				ride.getPickupLongitude());
-		
-		
+
 		ride.setDriver(nearestDriver);
 		
 		rideRepository.save(ride);

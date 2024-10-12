@@ -18,7 +18,7 @@ public interface UserService {
 	
 	public User findUserById(Integer Id) throws UserException;
 	
-	public User findUserByEmail(String email) throws UserException;
+//	public User findUserByEmail(String email) throws UserException;
 	
 	public User findUserByToken(String token) throws UserException;
 	

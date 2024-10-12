@@ -22,7 +22,7 @@ public class DtoMapper {
 		driverDto.setLongitude(driver.getLongitude());
 		driverDto.setMobile(driver.getMobile());
 		driverDto.setName(driver.getName());
-		driverDto.setRating(driver.getRatig());
+		driverDto.setRating(driver.getRating());
 		driverDto.setRole(driver.getRole());
 		driverDto.setVehicle(driver.getVehicle());
 		
